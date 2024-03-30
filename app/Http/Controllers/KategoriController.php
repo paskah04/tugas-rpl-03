@@ -4,18 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Kategori;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class KategoriController extends Controller
 {
     public function index()
     {
         $kategori = Kategori::all();
-        return view( 'backend.kategori.list', compact('kategori') );
+        return view( 'backend.content.kategori.list', compact('kategori') );
     }
 
     public function tambah()
     {
-        return view('backend.kategori.formTambah');
+        return view('backend.content.kategori.formTambah');
     }
 
     public function prosesTambah(Request $request)
@@ -70,4 +71,12 @@ class KategoriController extends Controller
             return redirect(route('kategori.index'))->with('pesan', ['danger', 'Gagal hapus kategori']);
         }
     }
+
+    public function exportPdf(){
+        $kategori = Kategori::all();
+        $pdf = Pdf::loadView('backend.content.kategori.export', compact('kategori'));
+        return $pdf->download('Data Kategori.pdf');
+    }
 }
+
+

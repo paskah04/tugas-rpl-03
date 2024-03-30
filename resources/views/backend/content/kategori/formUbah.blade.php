@@ -1,4 +1,4 @@
-@extends('backend/layout/main')
+@extends('backend.layout.main')
 @section('content')
     <div class="container-fluid">
         <h1 class="h3 mb-2 text-gray-800"> Form Ubah Kategori </h1>
@@ -8,7 +8,8 @@
                 @csrf
                 <div class="mb 3">
                     <label class="form-label">Nama Kategori</label>
-                    <input type="text" name="nama_kategori" value="{{$kategori->nama_kategori}}}" class="form-control @error('nama_kategori') is-invalid @enderror">
+                    <input type="text" name="nama_kategori" value="{{$kategori->nama_kategori}}}"
+                           class="form-control @error('nama_kategori') is-invalid @enderror">
                     @error('nama_kategori')
                     <span style="color: red font-weight: 600; font-size: 9pt">{{$message}}</span>
                     @enderror
